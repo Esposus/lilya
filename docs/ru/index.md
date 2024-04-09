@@ -29,11 +29,11 @@ hide:
 
 ---
 
-**Documentation**: [https://lilya.dev](https://lilya.dev) 📚
+**Документация**: [https://lilya.dev](https://lilya.dev) 📚
 
-**Source Code**: [https://github.com/dymmond/lilya](https://github.com/dymmond/lilya)
+**Исходный код**: [https://github.com/dymmond/lilya](https://github.com/dymmond/lilya)
 
-**The official supported version is always the latest released**.
+**Официальная поддерживаемая версия всегда является последней выпущенной версией**.
 
 ---
 
@@ -49,99 +49,97 @@ hide:
 
 Почти без жестких зависимостей, 100% написаный на Python, полностью типизированный и готовый к использованию в продакшене.
 
-## What does it bring?
+## Какие преимущества принесет Lilya?
 
-Lilya comes bearing fruits.
+Lilya приносит с собой целый ряд преимуществ.
 
-* A lightweight ASGI toolkit/framework.
-* Support for HTTP/WebSocket.
-* Tasks (in ASGI known as background tasks).
-* Lifespan events (on_startup/on_shutdown and lifespan).
-* Native permission system.
+* легковесный набор инструментов/фреймворк для ASGI.
+* Поддержка HTTP/WebSocket.
+* Задачи (в ASGI известны как фоновые задачи (background tasks)).
+* События жизненого цикла - lifespan events (on_startup/on_shutdown и lifespan).
+* Собственная система разрешений (permissions).
 * Middlewares (Compressor, CSRF, Session, CORS...).
-* A native and **optional** [client](./lilya-cli.md).
-* **Directive management control system** for any custom scripts to run inside the application.
-* Little hard dependencies.
-* Compatibility with `trio` and `asyncio`.
-* Dynamic routing system with the help of the native **Include** and minimum boilerplate.
-* Native settings system. No more bloated instances.
+* Собственный и **опциональный** [клиент](./lilya-cli.md).
+* **Система управления директивами** для запуска любых пользовательских скриптов внутри приложения.
+* Минимальное количество жестких зависимостей.
+* Совместимость с `trio` и `asyncio`.
+* Динамическая система маршрутизации с использованием нативного **Include** и минимального бойлерплейта.
+* Собственная система настроек. Больше никаких раздутых экземпляров.
 
-## Installation
+## Установка
 
-If you want just the toolkit/framework.
+Если Вам нужно установить только фреймворк.
 
 ```shell
 $ pip install lilya
 ```
 
-If you wish to use to extra functionalities such as the **shell** or **directives**
-(project scaffold generation to speed up).
+Если вы хотите использовать дополнительные возможности, такие как **shell** или **directives**
+(создание шаблона проекта для более быстрого старта разработки).
 
 ```shell
-$ pip install lilya[cli,ipython] # for ipython shell
-$ pip install lilya[cli,ptpython] # for ptpython shell
+$ pip install lilya[cli,ipython] # для ipython shell
+$ pip install lilya[cli,ptpython] # для ptpython shell
 ```
 
-You can learn more about the [client](./directives/discovery.md) in the documentation.
+Подробнее о [клиенте](./directives/discovery.md) вы можете узнать в документации.
 
-Or if you want to install everything that will allow you to use all the resources of Lilya, such
-as some specific middlewares.
+Либо вы можете установить сразу всё, чтобы использовать все возможности Lilya,
+как, например, определенные middleware.
 
 ```shell
 $ pip install lilya[all]
 ```
 
-### Additional
+### Дополнительно
 
-You would want to install an ASGI server such as [uvicorn](https://www.uvicorn.org/) or
-[hypercorn](https://pgjones.gitlab.io/hypercorn/) as well.
+Вам потребуется установить ASGI сервер, например [uvicorn](https://www.uvicorn.org/) или
+[hypercorn](https://pgjones.gitlab.io/hypercorn/).
 
-## Quickstart
+## Быстрый старт
 
-If you are familiar with other Python frameworks and toolkits, Lilya provides you with the same
-feeling.
+Для вас многое будет уже знакомым, если вы имеете опыт работы с фреймворками и веб-инструментами на Python.
 
-A Lilya also uses a [native settings system](./settings.md) which is something that can be extremely useful
-for any application.
+Кроме того, Lilya использует [собственную систему настроек](./settings.md),
+что может быть чрезвычайно полезно для любого приложения.
 
 ```python
 {!> ../docs_src/quickstart/app.py !}
 ```
 
-Is this simple. Although there is a lot to unwrap here. Did you notice the path `/{user}` not only
-does not require a `request` to be declared and instead, receives a `user: str`?
+Просто, не правда ли? Хотя здесь есть о чем рассказать. Вы заметили, что путь `/{user}`
+не только не требует объявления `request`, но и вместо этого получает `user: str`?
 
-Well, Lilya does a lot of internal magic for you. If you don't declare a `request`, that is not a
-problem as it will only pass it if its there.
+Lilya творит много внутренней магии для вас. Если вы не объявляете `request` это не проблема, 
+так как он будет передан только в том случае, если он есть.
 
-If you have the path parameter declared in the function handler as well, Lilya will automatically
-search for the parameters declared and match them against the path parameters declared in the `Path`
-and inject them for you.
+Если вы передали path параметр и в хэндлере, то Lilya автоматически выполнит поиск объявленных параметров, сопоставит их
+с параметрами path, объявленными в `Path`, и подставит их за вас.
 
-Pretty cool, right? This is just scratching the surface.
+Круто, не так ли? И это только начало!
 
-## Definitions
+## Определения
 
-Lilya can be considered a framework or a toolkit and the reasoning for it its because each component
-such as middlewares, permissions, Path, Router... can be seen as an independent ASGI application.
+Lilya можно рассматривать как фреймворк или как набор инструментов (англ. toolkit) и это объясняется тем, что каждый
+компонент, такой как middlewares, permissions, Path, Router... можно рассматривать как независимые ASGI приложения.
 
-In other words, you can build a [middleware](./middleware.md) or a [permission](./permissions.md) and
-share those with any other existing ASGI framework out there, meaning, you could design a Lilya
-application, middlewares, permissions and any other component and re-use them in [Esmerald][esmerald]
-or [FastAPI][fastapi] or any other, really.
+Другими словами, вы можете создать [middleware](./middleware.md) или [permission](./permissions.md) и использовать их с 
+любым другим существующим ASGI фреймворком, то есть вы действительно можете создать приложение Lilya, middlewares, permissions и 
+любой другой компонент и переиспользовать их в [Esmerald][esmerald] или [FastAPI][fastapi], или с любым другим.
 
-**Lilya is not a full-fledge framework like [Esmerald][esmerald] or [FastAPI][fastapi], instead**
-**its a lightweight toolkit/framework that can be used to build those as well as working on its own.**
+**Lilya не полноценный фреймворк как [Esmerald][esmerald] или [FastAPI][fastapi], а легковесный**
+**набор инструментов/фреймворк, который можно использовать как для создания новых фреймворков, 
+так и для самостоятельной разработки.**
 
-**Example**
+**Пример**
 
 ```python
 {!> ../docs_src/quickstart/example.py !}
 ```
 
-## Run the application
+## Запуск приложения
 
-To run the application from the example.
+Чтобы запустить приложение из примера.
 
 ```shell
 $ uvicorn myapp:app
