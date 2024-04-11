@@ -1,98 +1,87 @@
-# Applications
+# Приложения
 
-Lilya brings a class called `Lilya` which wraps all the functionality of the application.
+Lilya предоставляет класс под названием `Lilya`, который объединяет в себе
+всю функциональность приложения.
 
 ```python
 from lilya.apps import Lilya
 ```
 
 There are many ways of creating a Lilya application but:
+Существует множество способов создания приложения, например:
 
-=== "In a nutshell"
+=== "В двух словах"
 
     ```python
     {!> ../docs_src/applications/nutshell.py !}
     ```
 
-=== "With Include"
+=== "с использованием Include"
 
     ```python
     {!> ../docs_src/applications/with_include.py!}
     ```
 
-## Testing using curl
+## Тестирование с помощью curl
 
 ```shell
 $ curl -X GET http://localhost:8000/user/lilya
 ```
 
-## Create an instance of an application
+## Создание экземпляра приложения
 
-Creating an appliation instance can be done in different ways and with a great plus of using the
-[settings](./settings.md) for a cleaner approach.
+Существует несколько способов создания экземпляра приложения. Использование [настроек](./settings.md) делает этот процесс проще.
 
-**Parameters**:
+**Параметры**:
 
-* **debug** - Boolean indicating if a debug tracebacks should be returns on errors. Basically, debug mode,
-very useful for development.
-* **settings_module** - A [settings](./settings.md) instance or class definition from where the settings
-values will be read.
-* **routes** - A list of routes to serve incoming HTTP and WebSocket requests.
-A list of [Path](./routing.md#path), [WebSocketPath](./routing.md#websocketpath), [Include](./routing.md#include) and
-[Host](./routing.md#host).
-requests (HTTP and Websockets).
-* **permissions** - A list of [permissions](./permissions.md) to serve the application incoming
-requests (HTTP and Websockets).
-* **middleware** - A list of [middleware](./middleware.md) to run for every request. The middlewares can be subclasses of the [MiddlewareProtocol](./middleware.md#protocol).
-* **exception handlers** - A dictionary of [exception types](./exceptions.md) (or custom exceptions) and the handler
-functions on an application top level. Exception handler callables should be of the form of
-`handler(request, exc) -> response` and may be be either standard functions, or async functions.
-* **on_shutdown** - A list of callables to run on application shutdown. Shutdown handler callables do not take any
-arguments, and may be be either standard functions, or async functions.
-* **on_startup** - A list of callables to run on application startup. Startup handler callables do not take any
-arguments, and may be be either standard functions, or async functions.
-* **lifepan** - The lifespan context function is a newer style that replaces on_startup / on_shutdown handlers.
-Use one or the other, not both.
-* **include_in_schema** - Boolean flag to indicate if should be schema included or not. This can be useful
-if you are depracating a whole [Included](./routing.md#include) Lilya application in favour of a new one. The flag
-should indicate that all the paths should be considered deprecated.
-* **redirect_slashes** - Flag to enable/disable redirect slashes for the handlers. It is enabled by default.
+* **debug** - Булево значение, указывающее, должна ли отладочная трассировка возвращать ошибки.
+В целом, режим отладки очень полезен для разработки.
+* **settings_module** - Экземпляр [settings](./settings.md) или определение класса из которого будут считываться значения настроек.
+* **routes** - Список маршрутов для обслуживания входящий HTTP и WebSocket запросов.
+Список [Path](./routing.md#path), [WebSocketPath](./routing.md#websocketpath), [Include](./routing.md#include) и [Host](./routing.md#host) запросов (HTTP and Websockets).
+* **permissions** - Список [разрешений](./permissions.md) для обслуживания входящих запросов приложения (HTTP and Websockets).
+* **middleware** - Список [промежуточных обработчиков](./middleware.md), которые будут запускаться при выполнении каждого запроса. Промежуточные обработчики могут быть подклассом [MiddlewareProtocol](./middleware.md#protocol).
+* **exception handlers** - Словарь [exception types](./exceptions.md) (или пользовательских исключений) и соответствующих им функций обработчиков на верхнем уровне приложения. Вызываемые объекты (callables) обработчиков исключений должны иметь вид `handler(request, exc) -> response` и могут быть как стандартными, так и асинхронными функциями.
+* **on_shutdown** - Список вызываемых объектов запускаемых при завершении работы приложения. Они не принимают никаких аргументов и могут быть как стандартными, так и асинхронными функциями.
+* **on_startup** - Список вызываемых объектов запускаемых при начале работы приложения. Они не принимают никаких аргументов и могут быть как стандартными, так и асинхронными функциями.
+* **lifepan** - Функция контекста работы приложения - это более новый стиль, который заменяет обработчики on_startup / on_shutdown. Используйте один или другой подход, но не оба.
+* **include_in_schema** - Флаг с булевым значением, указывающий, следует ли включать схему или нет. Это может быть полезным, если вы отказываетесь от всего [включенного](./routing.md#include) приложения Lilya в пользу нового. Флаг указывает на то, что все пути должны считаться устаревшими.
+* **redirect_slashes** - Флаг для включения/выключения косых черт ("/") перенаправления для обработчиков. По умолчанию он включен.
 
-## Application settings
+## Настройки приложения
 
-Settings are another way of controlling the parameters passed to the
-[Lilya object when instantiating](#instantiating-the-application). Check out the [settings](./settings.md) for
-more details and how to use it to power up your application.
+Настройки - еще один способ управления параметрами передаваемых
+[Объекту Lilya при инициализации](#instantiating-the-application). Подробнее и о том, как использовать их для настройки вашего приложения, можно узнать в [разделе настроек](./settings.md).
 
-To access the application settings there are different ways:
+Для доступа к настройкам приложения есть несколько способов:
 
-=== "Within the application request"
+=== "Внутри запроса (request) приложения"
 
     ```python hl_lines="6"
     {!> ../docs_src/applications/settings/within_app_request.py!}
     ```
 
-=== "From the global settings"
+=== "Из глобальных настроек"
 
     ```python hl_lines="1 6"
     {!> ../docs_src/applications/settings/global_settings.py!}
     ```
 
-## State and application instance
+## Состояние (State) and экземпляр приложения
 
-You can store arbitraty extra state on the application instance using the `state` attribute.
+Вы можете хранить произвольное дополнительное состояние в экземпляре приложения, используя атрибут `state`.
 
-Example:
+Пример:
 
 ```python hl_lines="6"
 {!> ../docs_src/applications/app_state.py !}
 ```
 
-## Accessing the application instance
+## Доступ к экземпляру приложения
 
-The application instance is **always** available via `request` or via `context`.
+Экземпляр приложения **всегда** доступен через `request` или через `context`.
 
-**Example**
+**Пример**
 
 ```python
 from lilya.apps import Lilya
@@ -101,13 +90,13 @@ from lilya.context import Context
 from lilya.routing import Path
 
 
-# For request
+# Для запроса
 def home_request(request: Request):
     app = request.app
     return {"message": "Welcome home"}
 
 
-# For context
+# Для контекста
 def home_context(context: Context):
     app = context.app
     return {"message": "Welcome home"}
