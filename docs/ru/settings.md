@@ -5,7 +5,10 @@ In every application, there arises a need for project-specific settings to ensur
 As a project grows in complexity, and settings become dispersed throughout the codebase,
 managing them can become challenging, leading to a potential organizational mess.
 
-В каждом приложении возникает необходимость настройки под конкретный проект, чтобы обеспечить его уникальность.
+В каждом приложении требуется настройка под конкретный проект, чтобы обеспечить его уникальность.
+
+Если проект усложняется, а настройки разбросаны по всей кодовой базе, управлять ими становится сложно.
+Это может привести к хаосу в организации.
 
 Управление ими может стать сложной задачей по мере усложнения проекта и разнесения настроек по всей кодовой базе, что может привести к потенциальному организационному беспорядку.
 
