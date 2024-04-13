@@ -5,42 +5,45 @@ In every application, there arises a need for project-specific settings to ensur
 As a project grows in complexity, and settings become dispersed throughout the codebase,
 managing them can become challenging, leading to a potential organizational mess.
 
-Lilya leverages [Dymmond Setings](https://settings.dymmond.com).
+В каждом приложении возникает необходимость настройки под конкретный проект, чтобы обеспечить его уникальность.
 
-!!! warning
-    All the settings in Lilya use Python dataclasses.
+Управление ими может стать сложной задачей по мере усложнения проекта и разнесения настроек по всей кодовой базе, что может привести к потенциальному организационному беспорядку.
 
-## How to use
+Lilya использует [Dymmond Setings](https://settings.dymmond.com).
 
-There are two ways of using the settings object within a Lilya application.
+!!! внимание
+    Все настройки в Lilya используют датаклассы Python.
 
-* Using the **LILYA_SETTINGS_MODULE** environment variable
-* Using the **[settings_module](#the-settings_module)** instance attribute.
+## Как использовать
 
-Each one of them has particular use cases but they also work together is perfect harmony.
+Есть два способа как использовать объект settings в приложении Lilya.
 
-## Settings and the application
+* С помощью переменной окружения **LILYA_SETTINGS_MODULE**
+* С помощью атрибута экземпляра **[settings_module](#the-settings_module)**.
 
-When starting a Lilya instance if no parameters are provided, it will automatically load the defaults from the
-system settings object, the `Settings`.
+У каждого из них есть свои сценарии использования, но они также прекрасно сочетаются друг с другом.
 
-=== "No parameters"
+## Настройки и приложение
+
+Если при запуске экземпляра Lilya параметры не указаны, то будут автоматически подгружены значения по умолчанию из объекта системных настроек `Settings`.
+
+=== "Без параметров"
 
     ```python
     {!> ../docs_src/settings/app/no_parameters.py!}
     ```
 
-=== "With Parameters"
+=== "С параметрами"
 
     ```python
     {!> ../docs_src/settings/app/with_parameters.py!}
     ```
 
-## Custom settings
+## Пользовательские настройки
 
-Using the defaults from `Settings` generally will not do too much for majority of the applications.
+Использование настроек по умолчанию из `Settings` как правило не очень подходит для большинства приложений.
 
-For that reason custom settings are needed.
+Поэтому необходимы пользовательские настройки.
 
 **All the custom settings should be inherited from the `Settings`**.
 
